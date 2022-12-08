@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const one= require('./module')
+
 const logger1=require('../loggerr/logger')
 const helper1=require('../util/helper')
 const formatter1=require('../validator/formatter')
@@ -26,15 +26,10 @@ router.get('/test-me', function (req, res) {
 
 
 router.get('/test-you', function(req, res){
-    // one.buddyData("heeyyyy budddyyyyy")
-    // one.nameData("vinti")
     
-    // console.log("look there how is going ", one.three)
     res.send("very important text")
 })
-router.get('/buddy', function (req, res) {
-    res.send('npoooooooooooooo')
-});
+
 
 
 module.exports = router;
