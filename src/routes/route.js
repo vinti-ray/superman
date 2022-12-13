@@ -6,6 +6,7 @@ const _ = require('underscore')
 const mentorModule = require('../abc/xyz/myModule'); 
 const req = require('express/lib/request');
 const { route } = require('express/lib/application');
+const { functions } = require('underscore');
 
 
 // router.get("/profile-details", function(req, res){
@@ -116,6 +117,55 @@ for(let i=0;i<filmsList.length;i++){
 }
 )
 
+//qus 1    // -write an api which gives the missing number in an array of integers starting from 1….e.g [1,2,3,5,6,7] : 4 is missing
+ // Your route code will look like this
+//  app.get("/sol1", function (req, res) {
+//     //logic : sum of numbers is n(n+1)/2..so get sum of all numbers in array. now take sum of numbers till last digit in the array
+//     let arr= [1,2,3,5,6,7]
+//     let missingNumber
+
+//     ///LOGIC WILL GO HERE 
+//     res.send(  { data: missingNumber  }  );
+// });
+
+// const findMissingNumber=[1,2,3,5,6,7,8,9]
+// app.get('/sol1', function(req,res){
+//     let len=findMissingNumber.length+1
+//       let ViaMath=len*(len+1)/2
+    
+//     const sumViahigh=findMissingNumber.reduce((acc,curr)=>{
+//         acc=acc+curr
+//         return acc
+//     },0)
+//     const missingNumber=ViaMath-sumViahigh
+//     res.send({ data: missingNumber  }  )
+// })
+//qus 2
+   // -write an api which gives the missing number in an array of integers starting from anywhere….e.g [33, 34, 35, 37, 38]: 36 is missing
+ // Your route code will look like this
+//  app.get("/sol2", function (req, res) {
+//     //logic : sum of n consecutive numbers is [ n * (first + last) / 2  ]..so get sum of all numbers in array. now take sum of n consecutive numbers.. n would be length+1 as 1 number is missing
+//     let arr= [33, 34, 35, 37, 38]
+//     let missingNumber
+
+//     ///LOGIC WILL GO HERE 
+
+//     res.send(  { data: missingNumber  }  );
+// });
+
+
+// let anotherQus=[33, 34, 35, 37, 38]
+// app.get('/sol2', function(req,res){
+//     const sumViaOrder=anotherQus.reduce((acc,curr)=>{
+//         acc=acc+curr
+//         return acc
+//     },0)
+//     let n=anotherQus.length+1
+//     let sumViaMath= n * (anotherQus[0] + anotherQus[(anotherQus.length)-1]) / 2
+//     const missingNumber=sumViaMath-sumViaOrder
+//     res.send({data: missingNumber})
+// })
+
 
 
 
@@ -125,7 +175,7 @@ for(let i=0;i<filmsList.length;i++){
 
 
 // // PATH Param example
-// router.get('/student-details/:name', function(req, res){
+router.get('/student-details/:name', function(req, res){
 //     /*
 //     params is an attribute inside request that contains 
 //     dynamic values.
@@ -134,31 +184,93 @@ for(let i=0;i<filmsList.length;i++){
 //     and value is what is sent in the request
 //     */
 
-//     let requestParams = req.params
+    let requestParams = req.params
 
-//     // JSON strigify function helps to print an entire object
-//     // We can use many ways to print an object in Javascript, JSON stringify is one of them
-//     console.log("This is the request "+ JSON.stringify(requestParams))
-//     let studentName = requestParams.name
-//     console.log('Name of the student is ', studentName)
+    // JSON strigify function helps to print an entire object
+    // We can use many ways to print an object in Javascript, JSON stringify is one of them
+    console.log("This is the request "+ JSON.stringify(requestParams))
+    let studentName = requestParams.name
+    console.log('Name of the student is ', studentName)
     
-//     res.send('Dummy response'+studentName)
-// })
+    res.send('Dummy response'+studentName)
+})
 
 // // PATH Param example
 // router.get("/profile/:name", function(req, res){
 //     console.log('Printing the request to find out wjere name is stored',req.params)
 //     console.log('user name is',req.params.name)
 //     //console.log(`User requesting for profile is ${name}`)
-//     res.send("dummy details" +req.params.name)
+//     res.send("dummy details" +req.params.name+ req.query.age)
 // })
 
-// // Query Param example
+// Query Param example
 // router.get("/shoes", function(req, res){
 //     console.log("The filter options for shoes are -",req.query)
 //     //req.query.size
 //     //req.query.brand
-//     res.send("dummy shoes response")
+//     const final={ 
+//         name: 'rebook',
+//         age :45 
+//     }
+//     res.send("dummy shoes response "+req.query.name)
 // })
+
+
+
+
+// router.post("/one", function(req,res){
+//     const data=req.body;
+//     console.log(data)
+//     for(let i=0;i<filmsList.length;i++){
+//         if(!players[i].name===req.body.name)
+//       players.push(data)
+// }
+//     res.send({data:players})
+// })
+
+
+
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ]
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ]
+       },
+   ]
+
+
+router.post('/players', function (req, res) {
+    let reqName=req.body.name
+let search=players.find(a=>a.name==reqName)
+ if(search==undefined){
+    players.push(req.body)
+ }
+    res.send(  { data: players , status: true }  )
+})
+
+
 
 module.exports = router;

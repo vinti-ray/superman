@@ -10,7 +10,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', route);
 
-app.listen(3000, function() {
+
+
+
+
+
+
+
+app.listen(3000, function() {                                                                //ask the importance of function() here
     console.log('Express app running on port ' + 3000)
 });
 
