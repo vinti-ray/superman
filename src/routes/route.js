@@ -160,4 +160,41 @@ router.post( "/post-query-2", function (req, res){
 })
 
 
+
+let persons= [
+    {
+    name: "PK",
+    age: 10,
+    votingStatus: false
+ },
+ {
+    name: "SK",
+    age: 20,
+    votingStatus: false
+ },
+ {
+    name: "AA",
+    age: 70,
+    votingStatus: false
+ },
+ {
+    name: "SC",
+    age: 5,
+    votingStatus: false
+ },
+ {
+    name: "HO",
+    age: 40,
+    votingStatus: false
+ }
+ ]
+router.post("/votingEligibility", function(req,res){
+    let ageFromQuery=req.query.validAge
+    const search= persons.filter(a=>a.age>ageFromQuery)
+    for (i=0;i<search.length;i++){
+        search[i].votingStatus=true
+    }
+    res.send({ data: search, status:true })
+}) 
+
 module.exports = router;
