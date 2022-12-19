@@ -13,14 +13,14 @@ const bookList = async function (req, res) {
 
 //6
 const getBooksInYear = async function (req, res) {
-  let yearInReq=req.query.year
+  let yearInReq=req.body.year
   let findBookByYear=await bookModel.find({year:yearInReq})
   res.send({ msg:findBookByYear});
 }
 //7
-const getParticularBooks = async function (req, res) {
+const getParticularBooks = async function (req, res) { 
    let fromBody=req.body
-  let getBookFromInput= await bookModel.find(fromBody)
+  let getBookFromInput= await bookModel.find(fromBody)     //because content in body is in object form and we pass a object in find itself hance we didn't used here {}
   res.send({ msg:getBookFromInput});
 }
 

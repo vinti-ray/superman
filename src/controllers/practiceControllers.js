@@ -6,11 +6,12 @@ const createPractice=async function(req,res){
 }
 const getData=async function(req,res){
     let page=req.query.pagenumber
-let fetchData=await Practice.find({name: /.*int.*/}).select({name:1,roll:1,_id:0})
+let fetchData=await Practice.find({$or:[{roll:2},{name:"amar"}]}).select({name:1,roll:1,_id:0})
     res.send({msg:fetchData})
 }
 module.exports.createPractice=createPractice
 module.exports.fetchData=getData
+
 
 
 //skip(n) skips n items in a query, while limit(m) returns only the next m items starting from the n-th one.
