@@ -29,7 +29,7 @@ let updatePrice=async function(req,res){
     )
 
     let id=findUpdate.author_id
-    let authorName=await authorDetails.findOne({author_id:1}).select({
+    let authorName=await authorDetails.findOne({author_id:id}).select({
         author_name:1,_id:0})
     console.log(id)
     
@@ -41,34 +41,23 @@ let updatePrice=async function(req,res){
 let bookInRange=async function(req,res){
     
        let bookPrice= (await bookDetails.find({price:{$gte:50,$lte:100}}).select({author_id:1,_id:0}))
-      let authorList=await authorDetails.find()
-    //   console.log(authorList)
-    // console.log(bookPrice)  
-    //     [{ author_id: 1 },
-    //     { author_id: 1 },
-    //     { author_id: 1 },
-    //     { author_id: 1 },
-    //     { author_id: 2 },
-    //     { author_id: 2 }
-    //   ]
+
     let id=[]
-    for (let i = 0; i < bookPrice.length; i++) {
-	let did = bookPrice[i]["author_id"]
-    id.push(did)
+        for (let i = 0; i < bookPrice.length; i++) {
+        let did = bookPrice[i]["author_id"]
+        id.push(did)
+            }
+let out=[]
+for (let i = 0; i < id.length; i++) {
+    let authorName=await authorDetails.findOne({author_id:id[i]}).select({
+        author_name:1,_id:0})
+    
+    out.push(authorName)
 }
-// let out=[]
-// for (let i = 0; i < bookPrice.length; i++) {
-//     let notdid=await authorDetails.find({author_id:id[i]})
-//     out.push(notdid)
-// }
-let boby=id.map(async (a)=>{
-    let notdid=await authorDetails.find({author_id:a})
-    return notdid
-}) 
-    console.log(boby)                           
-res.send({boby})
-// res.send({msg:out})
-    }
+                          
+res.send({msg:out})
+
+}
 
 module.exports.createAuthor=createAuthor
 module.exports.createBookDetails=createBookDetails

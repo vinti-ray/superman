@@ -38,4 +38,12 @@ router.get("/dateManipulations", function (req, res) {
     res.send({ msg: "all good"})
 })
 
+//assigm,emt
+const assignmentController=require("../controllers/assignmentController")
+router.post("/createAuthor", assignmentController.createAuthor  )
+router.post("/createBookDetails", assignmentController.createBookDetails  )
+router.get("/findBook", assignmentController.findBook  )
+router.post("/updatePrice", assignmentController.updatePrice  )
+
+router.get("/bookInRange", assignmentController.bookInRange  )
 module.exports = router;
