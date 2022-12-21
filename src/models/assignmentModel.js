@@ -1,4 +1,5 @@
 const mongoose =require('mongoose');
+const ObjectId=mongoose.Schema.Types.ObjectId
 const bookSchema=new mongoose.Schema({
     bookName:{
         type:String,
@@ -15,6 +16,10 @@ const bookSchema=new mongoose.Schema({
     tags:[String],
     authorName:String,
     totalPages:Number,
-    stockAvailable:Boolean
+    stockAvailable:Boolean,
+    author_id:{
+        type:ObjectId,
+        ref:'practice'
+    }
 },{timestamps:true})
 module.exports=mongoose.model("BookCollection",bookSchema)

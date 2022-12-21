@@ -3,14 +3,10 @@ const createPractice=async function(req,res){
     let data=req.body
     let SaveData= await Practice.create(data)
     res.send({msg:SaveData})
-}
+} 
 const getData=async function(req,res){
     let data=req.body
-    let updateThis=await Practice.findOneAndUpdate(
-        {name:"falana"},
-        {$set:data},
-        {new:true,upsert:true}
-    )
+let updateThis=await Practice.find({name:/.*Porter.*/i})
     res.send({msg:updateThis})
 }
 module.exports.createPractice=createPractice

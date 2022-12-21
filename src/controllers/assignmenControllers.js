@@ -1,4 +1,5 @@
 const bookModel = require("../models/assignmentModel");
+const mongoose=require("mongoose")
 
 const createBook = async function (req, res) {
   let data = req.body;
@@ -7,7 +8,7 @@ const createBook = async function (req, res) {
 };
 
 const bookList = async function (req, res) {
-  let fetchBookList = await bookModel.find().select({ bookName: 1, authorName: 1, _id: 0 });
+  let fetchBookList = await bookModel.find().populate('author_id')
   res.send({ msg:fetchBookList});
 }
 

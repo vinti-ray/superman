@@ -24,7 +24,7 @@ router.get("/getUsersData", UserController.getUsersData)
 // router.get("/getBooksData", BookController.getBooksData)
 
 router.post("/practice",practiceController.createPractice)
-router.post("/fetchData", practiceController.fetchData)
+router.get("/fetchData", practiceController.fetchData)
 
 
 
@@ -32,19 +32,19 @@ router.post("/saveBook", bookController.createBook)
 router.get("/bookList", bookController.bookList)
 router.get("/getBooksInYear", bookController.getBooksInYear)
 router.get("/getParticularBooks", bookController.getParticularBooks)
-router.get("/getXINRBooks", bookController.getXINRBooks)
+router.get("/getXINRBooks", bookController.getXINRBooks)    
 router.get("/getRandomBooks", bookController.getRandomBooks)
 
-//
+//project
 const customerControler=require("../controllers/projectController")
 
 router.post("/createCustomer",customerControler.createCustomer)
 router.post("/createCard",customerControler.createCard)
-router.get("/findData",customerControler.findData)
-router.post("/deleted",customerControler.deleted)
+router.get("/findData",customerControler.findData)  
+router.post("/deleted",customerControler.deleted) 
 router.get("/getCard",customerControler.getCard)
-
-
+ 
+   
 
 
 

@@ -1,5 +1,6 @@
 const customerModel=require("../models/projectCustomerModel")
 const cardModel=require("../models/projectCardModel")
+const moment = require('moment')
 
 const createCustomer=async function(req,res){
     let data=req.body
@@ -27,10 +28,29 @@ const createCard=async function(req,res){
    let ab=findId[0].cardNumber
     data.cardNumber=++ab
 
-    let linkId=await customerModel.find({}).sort({_id:-1}).limit(1)
+    let linkId=await customerModel.find({}).sort({_id:-1}).limit(1) 
+
+
+    // let findName=await customerModel.find().select({firstName:1,lastName:1,_id:0})
+    // let d=[]
+    // for(let i=0;i<findName;i++){
+    //     let a=findName[i].firstName
+    //     let b=findName[i].lastName
+    //     let c=(a,b)
+        
+    //     d.push(c)
+    // }
+    // let b=findName[0].lastName
+    // let y=findName[0].firstName
+    // console.log((y,b).toString())
+    
+ 
+ 
     let abc=linkId[0].customerID
     data.customerID=abc
     
+
+                                                
     let createData=await cardModel.create(data)
     res.send({msg:createData})
 }
