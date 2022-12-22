@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const ObjectId=mongoose.Schema.Types.ObjectId
 const cardCollection =new mongoose.Schema({
     cardNumber:String,  
     cardType:{type:String, 
@@ -12,7 +13,10 @@ const cardCollection =new mongoose.Schema({
         default:"ACTIVE",
     }, 
     vision:String,
-    customerID:String    
+    customerID:{
+        type:ObjectId,
+        ref:'CustomerCollection'
+    }    
 })
 
 module.exports=mongoose.model("cardCollection",cardCollection)
