@@ -10,7 +10,7 @@ const assignmentController=require('../controllers/assignmentControllers')
 const assignmentMiddleware=require('../middlewares/assignmentMiddleware')
 
 router.post("/createNewData",assignmentController.createBook)
-router.get("/getData",assignmentController.getData)
+router.get("/getData",assignmentMiddleware.middware,assignmentController.getData)
 
 
 

@@ -8,6 +8,8 @@ const createBook= async function (req, res) {
 
 const getData=async function(req,res){
     res.send({msg:"hello"})
+
+
 }
 module.exports.createBook=createBook
 module.exports.getData=getData

@@ -4,6 +4,7 @@ const route = require('./routes/route.js');
 const { default: mongoose } = require('mongoose');
 const app = express();
 const address=require("./middlewares/assignmentMiddleware")
+const moment=require('moment')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,22 +22,34 @@ mongoose.connect("mongodb+srv://vintiray:7091201680@cluster0.ahtxrqr.mongodb.net
 //         next();
 //   }
 //   );
+app.use(
+    function(req,res,next){
+        console.log(req.path)   //or use console.log(req.originalUrl)
+        next()
+    }
+)
 
 
-
-  app.use( function(req, res,next) {
+app.use( function(req, res,next) {
     const ipAddress = req.socket.remoteAddress;
     console.log(ipAddress);
     next()
 });
-const http = require("http");
+
 
 app.use(function(req, res,next){
-    let data =http.request
-    console.log(data)
+   let a= new Date().toISOString().
+  replace(/T/, ' ').      // replace T with a space
+  replace(/\..+/, '')     // delete the dot and everything after
+  console.log(a)
     next()
 })
-
+app.use(
+    function(req,res,next){
+        console.log(moment().format('YYYY-MM-DD hh:mm:ss'),req.socket.remoteAddress,req.path)
+        next()
+    }
+)
 
 
 
