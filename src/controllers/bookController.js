@@ -10,7 +10,7 @@ const createBook= async function (req, res) {
     
     if(!book["author_id"])   return res.send({msg:"this detail is required"})
 
-     const idPresence=await authorModel.findById(id)
+     const idPresence=await authorModel.findById(id) 
     if(!idPresence)  return res.send({status:false,msg:"the author is not present"})
      
     if(!book["publisher_id"])   return res.send({msg:"this detail is required"})
@@ -34,7 +34,6 @@ const getBooksWithAuthorDetails = async function (req, res) {
     let specificBook = await bookModel.find({"name": "Revolution 2020"}).populate('author_id').populate('publisher_id')
     res.send({data: specificBook})
 
-
 }
 
 // For the books published by 'Penguin' and 'HarperCollins', update this key to true.
@@ -57,13 +56,13 @@ const getBooksWithAuthorDetails = async function (req, res) {
 
     let findAuthor =await authorModel.find({rating:{$gt:3.5}})
     const authorsId=findAuthor.map(a=>a._id)
-    console.log(findAuthor)
+    
 
     const updatePrice=await bookModel.updateMany(
         {author_id:{$in:authorsId}},
         {$inc:{"price":10}})
 
-           res.send({msg:updateData}) 
+           res.send({msg:updatePrice}) 
          
  }
 
