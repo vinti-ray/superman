@@ -37,17 +37,37 @@ const getBooksWithAuthorDetails = async function (req, res) {
 
 }
 
-//For the books published by 'Penguin' and 'HarperCollins', update this key to true.
-//  const updateUsingPut=async function(req,res){
-//        let updateData= await bookModel.updateMany(
-//         {},
-//         {$audd:{rating:5}}
-//        )
-//            res.send({msg:updateData})
+// For the books published by 'Penguin' and 'HarperCollins', update this key to true.
+
+
+ const updateUsingPut=async function(req,res){
+    // a)  For the books published by 'Penguin' and 'HarperCollins', update this key to true.
+    let getPublishersId=await publishersModel.find({name:{$in:['penguin','HarperCollins']}})
+    const publishersId=getPublishersId.map(a=>a._id)
+
+       let updateData= await bookModel.updateMany(
+        {publisher_id:{$in:publishersId}},
+        {$set:{isHardCover:true}}
+        
+       )
+
+
        
-//  }
+        //  b) For the books written by authors having a rating greater than 3.5, update the books price by 10 (For eg if old price for such a book is 50, new will be 60)
+
+    let findAuthor =await authorModel.find({rating:{$gt:3.5}})
+    const authorsId=findAuthor.map(a=>a._id)
+    console.log(findAuthor)
+
+    const updatePrice=await bookModel.updateMany(
+        {author_id:{$in:authorsId}},
+        {$inc:{"price":10}})
+
+           res.send({msg:updateData}) 
+         
+ }
 
 module.exports.createBook= createBook
 // module.exports.getBooksData= getBooksData
 module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails
-// module.exports.updateUsingPut=updateUsingPut
+module.exports.updateUsingPut=updateUsingPut
