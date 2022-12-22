@@ -5,9 +5,21 @@ const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
 const commonMW = require ("../middlewares/commonMiddlewares")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+//assignment
+const assignmentController=require('../controllers/assignmentControllers')
+const assignmentMiddleware=require('../middlewares/assignmentMiddleware')
+
+router.post("/createNewData",assignmentController.createBook)
+router.get("/getData",assignmentController.getData)
+
+
+
+
+
+
+
+
+
 
 
 
