@@ -3,7 +3,7 @@ const router = express.Router();
 const bookController=require("../controllers/assignmenControllers");
 const { Router } = require('express');
 
-//assignment
+// Assignment for 2 days of mongo
 router.post("/saveBook", bookController.createBook)
 router.get("/bookList", bookController.bookList)
 router.get("/getBooksInYear", bookController.getBooksInYear)
@@ -12,9 +12,7 @@ router.get("/getXINRBooks", bookController.getXINRBooks)
 router.get("/getRandomBooks", bookController.getRandomBooks)
 
 
-
-
-//project
+//project Jaikisan
 const customerControler=require("../controllers/projectController")
 const middWare=require("../middlewares/middlewares")
 
