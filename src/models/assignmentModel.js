@@ -16,10 +16,6 @@ const bookSchema=new mongoose.Schema({
     tags:[String],
     authorName:String,
     totalPages:Number,
-    stockAvailable:Boolean,
-    author_id:{
-        type:ObjectId,
-        ref:'practice'
-    }
+    stockAvailable:Boolean
 },{timestamps:true})
 module.exports=mongoose.model("BookCollection",bookSchema)

@@ -12,7 +12,7 @@ router.get("/getXINRBooks", bookController.getXINRBooks)
 router.get("/getRandomBooks", bookController.getRandomBooks)
 
 
-//project Jaikisan
+//project Jaikisan 
 const customerControler=require("../controllers/projectController")
 const middWare=require("../middlewares/middlewares")
 
@@ -26,6 +26,6 @@ router.get("/getCard",customerControler.getCard)
  
      
  
+ 
 
-
-module.exports = router;   
+module.exports = router;    

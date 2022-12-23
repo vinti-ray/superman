@@ -8,7 +8,7 @@ const createBook = async function (req, res) {
 };
 
 const bookList = async function (req, res) {
-  let fetchBookList = await bookModel.find().populate('author_id')
+  let fetchBookList = await bookModel.find()
   res.send({ msg:fetchBookList});
 }
 
