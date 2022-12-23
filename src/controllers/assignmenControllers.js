@@ -2,7 +2,7 @@ const bookModel = require("../models/assignmentModel");
 const mongoose=require("mongoose")
 
 const createBook = async function (req, res) {
-  let data = req.body;
+  let data = req.body; 
   let savedData = await bookModel.create(data);
   res.send(savedData);
 };

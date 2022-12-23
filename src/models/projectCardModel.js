@@ -2,8 +2,9 @@ const mongoose=require('mongoose')
 const ObjectId=mongoose.Schema.Types.ObjectId
 const cardCollection =new mongoose.Schema({
     cardNumber:String,  
-    cardType:{type:String, 
-    enum:["REGULAR","SPECIAL"]
+    cardType:{
+        type:String, 
+        enum:["REGULAR","SPECIAL"]
 
     },
     customerName:String,
