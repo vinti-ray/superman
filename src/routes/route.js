@@ -18,6 +18,8 @@ router.post("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW
 //assignment
 const userControllerNew=require("../controllers/userControllerone")
 const middOne=require("../middlewares/assignmentMiddleware")
+
+
 router.post("/createUser", middOne.middAssignment,userControllerNew.createUser)
 
 

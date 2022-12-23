@@ -1,7 +1,11 @@
 const user=function(req,res,next){
-    let dataFromHeader=req.headers.isFreeAppUser
-    console.log(dataFromHeader)
-    if(!dataFromHeader)    res.send({msg:"the request is missing a mandatory header"})
+    
+    console.log("The headers received in this request are: ", req.headers.isfreeappuser)
+    if(!req.headers.isfreeappuser)    res.send({msg:"the request is missing a mandatory header"});
+      
        next();
-   }
-module.exports.middAssignment=user      
+    
+   } 
+   
+
+module.exports.middAssignment=user                

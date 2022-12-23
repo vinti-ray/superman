@@ -12,7 +12,10 @@ const orderSchema= new mongoose.Schema({
     },
 
     amount:Number,
-    isFreeAppUser:Boolean,
+    isFreeAppUser:{
+        type :Boolean,
+      default:false
+    },
     date:String
 })
 module.exports=mongoose.model('orderCollection',orderSchema)

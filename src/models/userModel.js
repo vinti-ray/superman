@@ -15,8 +15,9 @@ const userSchema = new mongoose.Schema( {
     },
     isFreeAppUser:{
         type:Boolean,
-        default:false     
-    }
+        default:false
+            
+    } 
 }, { timestamps: true });
 
 module.exports = mongoose.model('UserDocument', userSchema) //users
