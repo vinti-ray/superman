@@ -5,12 +5,7 @@ const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
 const commonMW = require ("../middlewares/commonMiddlewares")
 
-//assignment
-const assignmentController=require('../controllers/assignmentControllers')
-const assignmentMiddleware=require('../middlewares/assignmentMiddleware')
 
-router.post("/createNewData",assignmentController.createBook)
-router.get("/getData",assignmentMiddleware.middware,assignmentController.getData)
 
 
 
@@ -60,7 +55,7 @@ router.post("/createBook", BookController.createBook  )
 
 
 
-router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
+router.get("/basicRoute", UserController.basicCode)
 
 
 
