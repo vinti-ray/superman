@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 const moment = require('moment')
-// const Date=moment().format('YYYY-MM-DD')
+
 const customerSchema= new mongoose.Schema({
     firstName:String,
     lastName:String,
@@ -9,7 +9,9 @@ const customerSchema= new mongoose.Schema({
         maxLength:10, 
         minLength:10
     },  
-    DOB:Date,
+    DOB:{
+        type:Date
+    },
     emailID:String,
     address:String,
     customerID:{

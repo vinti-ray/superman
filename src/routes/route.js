@@ -37,15 +37,18 @@ router.get("/getRandomBooks", bookController.getRandomBooks)
 
 //project
 const customerControler=require("../controllers/projectController")
+const middWare=require("../middlewares/middlewares")
 
-router.post("/createCustomer",customerControler.createCustomer)
+router.post("/createCustomer",middWare.validateEmail,customerControler.createCustomer)
 router.post("/createCard",customerControler.createCard)
 router.get("/findData",customerControler.findData)  
 router.post("/deleted",customerControler.deleted) 
 router.get("/getCard",customerControler.getCard)
- 
-   
 
+
+ 
+     
+ 
 
 
 module.exports = router;   
