@@ -8,20 +8,20 @@ const createOrderData=async function(req,res){
     let idONe=data['productId']
     let productValidate=await productModel.findById(idONe)
     if(!productValidate)    res.send({msg:"please enter a valid productID"})
-
+ 
    let idTwo=data['userId']
     let userValidate=await userModel.findById(idTwo)
     if(!userValidate)    res.send({msg:"please enter a valid userId"})
 
-
-    let isFreeAppUser=req.body['isFreeAppUser']
-    console.log(isFreeAppUser) 
-    let balanceOfUser=userValidate.balance
+ 
+    // let isFreeAppUser=req.headers.isfreeappuser
+    // console.log(isFreeAppUser) 
+    let balanceOfUser=userValidate.balance  
     let priceOfproduct=productValidate.price    
     let amount =data.amount
-    let cost= priceOfproduct*amount 
-          
-    if(!isFreeAppUser){
+    // let cost= priceOfproduct*amount 
+             
+    if(req.headers.isFreeAppUser===true){
         req.body.amount=0
         let savedData= await orderModel.create(req.body)
          res.send({msg: savedData})}   else{
@@ -32,12 +32,12 @@ const createOrderData=async function(req,res){
             req.body.amount=priceOfproduct
          let savedData= await orderModel.create(data)
          res.send({msg: savedData})}else{
-            res.send("the user doesn't have enough balance")
+            res.send({msg:"the user doesn't have enough balance"})
          }
          }
         }
 
-
+ 
 
 module.exports.createOrderData=createOrderData     
 
