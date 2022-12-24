@@ -18,6 +18,16 @@ router.post("/createProduct",productController.createProduct)
 router.post("/createOrderData",middOne.middAssignment, orderController.createOrderData)
 
 
+//for practice purpose
+const mw=require("../middlewares/practiceMiddleware")
+router.get("/practice/:name/:age",mw.mw,userControllerNew.practice)
+
+
+
+
+
+
+
 
 
 module.exports = router;  
