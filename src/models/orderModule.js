@@ -13,8 +13,8 @@ const orderSchema= new mongoose.Schema({
 
     amount:Number,
     isFreeAppUser:{
-        type :Boolean,
-      default:false
+        type :Boolean
+      
     },
     date:String
 })
