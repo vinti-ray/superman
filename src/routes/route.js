@@ -16,8 +16,8 @@ const orderController=require("../controllers/orderController")
 router.post("/createUser", middOne.middAssignment,userControllerNew.createUser)
 router.post("/createProduct",productController.createProduct)
 router.post("/createOrderData",middOne.middAssignment, orderController.createOrderData)
-
-
+ 
+ 
 //for practice purpose
 const mw=require("../middlewares/practiceMiddleware")
 router.get("/practice/:name/:age",mw.mw,userControllerNew.practice)

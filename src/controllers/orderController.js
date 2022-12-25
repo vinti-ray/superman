@@ -19,14 +19,14 @@ const createOrderData=async function(req,res){
     let balanceOfUser=userValidate.balance  
     let priceOfproduct=productValidate.price    
     let amount =data.amount
-    // let cost= priceOfproduct*amount 
+ 
              
-    if(req.headers.isFreeAppUser===true){
+    if(req.headers['isfreeappuser']===true){
         req.body.amount=0
         let savedData= await orderModel.create(req.body)
          res.send({msg: savedData})}   else{
 
-
+  
          if(balanceOfUser>priceOfproduct){
             let update= await userModel.findByIdAndUpdate(idTwo,{$set:{balance:(balanceOfUser-priceOfproduct)}},{new:true})
             req.body.amount=priceOfproduct
