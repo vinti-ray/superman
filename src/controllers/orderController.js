@@ -18,10 +18,9 @@ const createOrderData=async function(req,res){
     // console.log(isFreeAppUser) 
     let balanceOfUser=userValidate.balance  
     let priceOfproduct=productValidate.price    
-    let amount =data.amount
- 
+    let amount =data.amount 
              
-    if(req.headers['isfreeappuser']===true){
+    if(req.header['isFreeAppUser']===true){
         req.body.amount=0
         let savedData= await orderModel.create(req.body)
          res.send({msg: savedData})}   else{

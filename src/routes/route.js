@@ -19,8 +19,7 @@ router.post("/createOrderData",middOne.middAssignment, orderController.createOrd
  
  
 //for practice purpose
-const mw=require("../middlewares/practiceMiddleware")
-router.get("/practice/:name/:age",mw.mw,userControllerNew.practice)
+
 
 
 
