@@ -13,14 +13,14 @@ const createOrderData=async function(req,res){
     let userValidate=await userModel.findById(idTwo)
     if(!userValidate)    res.send({msg:"please enter a valid userId"})
 
- 
+  
     // let isFreeAppUser=req.headers.isfreeappuser
     // console.log(isFreeAppUser) 
     let balanceOfUser=userValidate.balance  
     let priceOfproduct=productValidate.price    
     let amount =data.amount 
              
-    if(req.header['isFreeAppUser']===true){
+    if(req.headers['isfreeappuser']=="true"){
         req.body.amount=0
         let savedData= await orderModel.create(req.body)
          res.send({msg: savedData})}   else{
