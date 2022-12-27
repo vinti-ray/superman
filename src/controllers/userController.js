@@ -15,7 +15,7 @@ const loginUser = async function (req, res) {
     let emailId=req.body.emailId
     let password=req.body.password
     const loginUser=await userModel.findOne({emailId:emailId,password:password})
-     if(!loginUser)   return res.send({status:false,msgz:"emailId or password is wrong"})
+     if(!loginUser)   return res.send({status:false,msg:"emailId or password is wrong"})
     let token=jwt.sign({userId:loginUser._id.toString(),name:req.body.firstName},"assignment-secret-key")
     res.send({status:true,data:token})
 
@@ -26,11 +26,9 @@ const loginUser = async function (req, res) {
 // If present, check that the token is valid.
 const getUserData = async function (req, res) {
    let userId=req.params.userId
-   let token=  req.headers["x-Auth-Token"]
-   if(!token) token =req.headers["x-auth-token"]
 
-   let verifyToken= jwt.verify(token,"assignment-secret-key") 
-   if(!verifyToken)    return res.send({status:false,msg:"there is something wrong in token"})
+
+
 
    let fetchUser=await userModel.findById(userId)
    if(!fetchUser) return res.send({status:false,msg:"no such user exist"})
@@ -58,6 +56,11 @@ const deleteData=async function(req,res){
   const deleteData= await userModel.findOneAndUpdate(userId,{$set:{isDeleted:true}})
   res.send({status:true,msg:deleteData})
 }
+
+
+
+
+
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;

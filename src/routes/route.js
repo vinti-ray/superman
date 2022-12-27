@@ -4,7 +4,8 @@ const userController= require("../controllers/userController")
 const authMW=require("../middleware/auth")
 
 
-router.post("/users", userController.createUser  )
+
+router.post("/users", userController.createUser  ) 
 
 router.post("/login", userController.loginUser)
 
@@ -15,4 +16,10 @@ router.put("/users/:userId",authMW.checkToken, userController.updateUser)
 
 router.put("/deleteUsers/:userId",authMW.checkToken, userController.deleteData)
 
+
+
+//practice
+const practice=require("../controllers/practiceController")
+router.post("/postUser",practice.post)
+router.post("/login",practice.login)
 module.exports = router;
