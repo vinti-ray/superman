@@ -26,9 +26,8 @@ const loginUser = async function (req, res) {
 // If present, check that the token is valid.
 const getUserData = async function (req, res) {
    let userId=req.params.userId
-   let token=req.headers["x-Auth-Token"]
-   if(!token)  token=req.headers["x-auth-token"]
-   if(!token)  return res.send({status:false,msg:"request is missing a mandatory header"})
+   let token=  req.headers["x-Auth-Token"]
+   if(!token) token =req.headers["x-auth-token"]
 
    let verifyToken= jwt.verify(token,"assignment-secret-key") 
    if(!verifyToken)    return res.send({status:false,msg:"there is something wrong in token"})
@@ -41,9 +40,7 @@ const getUserData = async function (req, res) {
 };
 //Write a **PUT api /users/:userId** to update user details. Pass the userId as path param in the url and update the attributes received in the request body. Check that request must contain **x-auth-token** header. If absent, return a suitable error.
 const updateUser = async function (req, res) {
-   let token=req.headers["x-Auth-Token"]
-   if(!token)  token=req.headers["x-auth-token"]
-   if(!token)   return res.send({status:false,msg:"request is missing a mandatory header"})
+
    let userId=req.params.userId
    let data=req.body
    console.log(data)
@@ -56,9 +53,7 @@ const updateUser = async function (req, res) {
 
 //- Write a **DELETE api /users/:userId** that takes the userId in the path params and marks the isDeleted attribute for a user as true. Check that request must contain **x-auth-token** header. If absent, return a suitable error.
 const deleteData=async function(req,res){
-  let token=req.headers["x-Auth-Token"]
-  if(!token)  token=req.headers["x-auth-token"]
-  if(!token)   return res.send({status:false,msg:"request is missing a mandatory header"})
+
   let userId=req.params.userId
   const deleteData= await userModel.findOneAndUpdate(userId,{$set:{isDeleted:true}})
   res.send({status:true,msg:deleteData})
