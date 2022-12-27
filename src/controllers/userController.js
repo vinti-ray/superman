@@ -16,7 +16,8 @@ const loginUser = async function (req, res) {
     let password=req.body.password
     const loginUser=await userModel.findOne({emailId:emailId,password:password})
      if(!loginUser)   return res.send({status:false,msg:"emailId or password is wrong"})
-    let token=jwt.sign({userId:loginUser._id.toString(),name:req.body.firstName},"assignment-secret-key")
+
+    let token=jwt.sign({userId:loginUser._id.toString(),name:loginUser.firstName},"assignment-secret-key")
     res.send({status:true,data:token})
 
 };
@@ -27,13 +28,10 @@ const loginUser = async function (req, res) {
 const getUserData = async function (req, res) {
    let userId=req.params.userId
 
-
-
-
    let fetchUser=await userModel.findById(userId)
    if(!fetchUser) return res.send({status:false,msg:"no such user exist"})
+   
    res.send({status:true,data:fetchUser})
-
 
 };
 //Write a **PUT api /users/:userId** to update user details. Pass the userId as path param in the url and update the attributes received in the request body. Check that request must contain **x-auth-token** header. If absent, return a suitable error.
@@ -53,7 +51,7 @@ const updateUser = async function (req, res) {
 const deleteData=async function(req,res){
 
   let userId=req.params.userId
-  const deleteData= await userModel.findOneAndUpdate(userId,{$set:{isDeleted:true}})
+  const deleteData= await userModel.findOneAndUpdate({_id:userId},{$set:{isDeleted:true}},{new:true})
   res.send({status:true,msg:deleteData})
 }
 
