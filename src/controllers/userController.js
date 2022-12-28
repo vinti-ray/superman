@@ -6,11 +6,12 @@ const userModel = require("../models/userModel");
 const createUser = async function (req, res) {
   try {
     let data = req.body;
+    if(Object.keys(data).length==0) res.status(400).send({error:"data is missing"})
     let savedData = await userModel.create(data);
     res.status(400).send({ msg: savedData });
   } catch (error) {
     res.status(500).send({ error: error.message });
-  }
+  } 
 };
 
 // Write a ***POST api /login** to login a user that takes user details - email and password from the request body. If the credentials don't match with any user's data return a suitable error.
@@ -63,7 +64,7 @@ const updateUser = async function (req, res) {
       new: true,
     });
 
-    res.send({ status: true, msg: updateData });
+    res.status(200).send({ msg: updateData });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
