@@ -21,14 +21,16 @@ const loginUser = async function (req, res) {
     res.status(200).send({msg:"all good"})
 
 };
-
+ 
 
 //- Write a **GET api /users/:userId** to fetch user details. Pass the userId as path param in the url. Check that request must contain **x-auth-token** header. If absent, return a suitable error.
 // If present, check that the token is valid.
 const getUserData = async function (req, res) {
-   let userId=req.params.userId
-
+   let userId=req.params.userId 
+   console.log(userId)
+    if(!userId) return res.send({msg:"userId is mandatory"})
    let fetchUser=await userModel.findById(userId)
+
    if(!fetchUser) return res.send({status:false,msg:"no such user exist"})
    res.send({status:true,data:fetchUser})
 
@@ -38,8 +40,10 @@ const getUserData = async function (req, res) {
 const updateUser = async function (req, res) {
 
    let userId=req.params.userId
+   if(!userId) return res.send({msg:"userId is mandatory"})
    let data=req.body
-   console.log(data)
+   if(Object.keys(data).length==0)  return res.send({msg:"data is missing in the request body"})
+   
    const updateData= await userModel.findOneAndUpdate({_id:userId},data,{new:true})
 
    res.send({status:true,msg:updateData})
@@ -51,6 +55,7 @@ const updateUser = async function (req, res) {
 const deleteData=async function(req,res){
 
   let userId=req.params.userId
+  if(!userId) return res.send({msg:"userId is mandatory"})
   const deleteData= await userModel.findOneAndUpdate(userId,{$set:{isDeleted:true}})
   res.send({status:true,msg:deleteData})
 }
