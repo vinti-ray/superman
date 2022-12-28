@@ -19,7 +19,7 @@ router.put("/deleteUsers/:userId",authMW.checkToken, userController.deleteData)
 
 
 //practice
-const practice=require("../controllers/practiceController")
-router.post("/postUser",practice.post)
-router.post("/login",practice.login)
+// const practice=require("../controllers/practiceController")
+// router.post("/postUser",practice.post)
+// router.post("/login",practice.login)
 module.exports = router;
