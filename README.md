@@ -7,3 +7,5 @@ Specific HTTP codes(only impt ones)
 // "BAD REQUEST" ...400..say if username password dont match etc..or anything generic( any problem in input on user side or any other unhandled problem) // "RESOURCE NOT FOUND"...404 //404 page not found...eg. find ("asaijndianud89")...let book =bookModel.findOne({_id:"asaijndianud89"}) if (book){..} else res.status(404).send({}) // "AUTHENTICATION MISSING"...401..login is required...if(token){...} else { res.status(401)} // "NOT AUTHENTICATED OR FORBIDDEN"..403 // if ( token.userId === userId) {...} else {res.status(403).send({}) } // -- try catch ....// "SERVER ERROR"...500
 
 // -- ALL GOOD... //status(200)- OK // --- "ALL GOOD and A NEW RESOURCE WAS SUCCEFULLY CREATED" ...status(201)..e.g a new user registers herself successfully
+
+//Status codes are issued by a server in response to a client's request made to the server.

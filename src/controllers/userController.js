@@ -1,14 +1,17 @@
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); 
 const { object } = require("webidl-conversions");
-const userModel = require("../models/userModel");
+const userModel = require("../models/userModel"); 
 
 //Write a **POST api /users** to register a user from the user details in request body.
 const createUser = async function (req, res) {
   try {
     let data = req.body;
+
     if(Object.keys(data).length==0) res.status(400).send({error:"data is missing"})
     let savedData = await userModel.create(data);
-    res.status(400).send({ msg: savedData });
+    res.status(201).send({ msg: savedData });
+ //201  the creation of a new resource
+
   } catch (error) {
     res.status(500).send({ error: error.message });
   } 
@@ -25,7 +28,8 @@ const loginUser = async function (req, res) {
       password: password,
     });
     if (!loginUser)
-      return res.status(400).send({ msg: "emailId or password is wrong" });
+      return res.status(401).send({ msg: "emailId or password is wrong" });  
+      //401 user does not have valid authentication credentials for the target resource.
     let token = jwt.sign(
       { userId: loginUser._id.toString(), name: loginUser.firstName },
       "assignment-secret-key"
@@ -54,11 +58,12 @@ const getUserData = async function (req, res) {
 const updateUser = async function (req, res) {
   try {
     let userId = req.params.userId;
-    if (!userId) res.status(401).res.send({ error: "userId is required" });
+
     let data = req.body;
+    
     let dataPresent = Object.keys(data);
     if (dataPresent.length == 0)
-      res.status(401).send({ error: "data is missing" });
+      res.status(400).send({ error: "data is missing" });
     console.log(data);
     const updateData = await userModel.findOneAndUpdate({ _id: userId }, data, {
       new: true,
@@ -77,7 +82,7 @@ const deleteData = async function (req, res) {
     const deleteData = await userModel.findOneAndUpdate(userId, {
       $set: { isDeleted: true },
     });
-    res.send({ status: true, msg: deleteData });
+    res.status(200).send({ msg: deleteData });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
